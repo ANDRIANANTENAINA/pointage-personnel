@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -63,6 +62,14 @@ public class PointageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        datePointagePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
+            try {
+                setTablePointage();
+            } catch (SQLException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
         try {
             // Set default date to today
             if(datePointagePicker.getValue() == null)
@@ -80,16 +87,6 @@ public class PointageController implements Initializable {
         tableView.setItems(PointageDAO.searchPointage(search, datePointagePicker.getValue()));
     }
 
-    @FXML
-    void onChangeDate(ActionEvent event) {
-        datePointagePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
-            try {
-                setTablePointage();
-            } catch (SQLException | ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-        });
-    }
 
     private void setTablePointage() throws SQLException, ClassNotFoundException {
         colNum.setCellValueFactory(cellData -> cellData.getValue().numEmplProperty().asObject());
@@ -136,6 +133,16 @@ public class PointageController implements Initializable {
 
     @FXML
     void handleUpdatePointage(MouseEvent event) {
+
+    }
+
+    @FXML
+    void onClickPresent(MouseEvent event) {
+
+    }
+
+    @FXML
+    void onClickAbsent(MouseEvent event) {
 
     }
 

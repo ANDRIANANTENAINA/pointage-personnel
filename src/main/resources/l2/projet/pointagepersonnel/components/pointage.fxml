@@ -36,12 +36,12 @@
                               <Button fx:id="btnUpdatePointage" graphicTextGap="1.0" layoutX="143.0" layoutY="42.0" mnemonicParsing="false" onMouseClicked="#handleUpdatePointage" prefWidth="85.0" styleClass="button2" stylesheets="@../css/style.css" text="Modifier" textFill="#030000" />
                               <Button fx:id="btnDeletePointage" graphicTextGap="1.0" layoutX="207.0" layoutY="42.0" mnemonicParsing="false" onMouseClicked="#handleDeletePointage" prefWidth="85.0" styleClass="button2" stylesheets="@../css/style.css" text="Supprimer" />
                               <Button fx:id="checkPresent" mnemonicParsing="false" onMouseClicked="#handlePointage" text="PRESENT" />
-                              <DatePicker fx:id="datePointagePicker" onAction="#onChangeDate" prefHeight="25.0" prefWidth="100.0" />
+                              <DatePicker fx:id="datePointagePicker" prefHeight="25.0" prefWidth="100.0" />
                               <TextField fx:id="textFieldSearch" onKeyTyped="#searchPointage" prefHeight="25.0" prefWidth="225.0" promptText="recherche ..." styleClass="text-field-search" stylesheets="@../css/style.css" />
                               <VBox alignment="CENTER_LEFT" prefHeight="89.0" prefWidth="116.0" spacing="10.0">
                                  <children>
-                                    <RadioButton fx:id="radioAbsent" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" text="Liste absent(e) " textFill="#00ae26" />
-                                    <RadioButton fx:id="radioPresent" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" text="Liste present(e)" textFill="#00ae26" />
+                                    <RadioButton fx:id="radioAbsent" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onClickAbsent" text="Liste absent(e) " textFill="#00ae26" />
+                                    <RadioButton fx:id="radioPresent" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onClickPresent" text="Liste present(e)" textFill="#00ae26" />
                                  </children>
                               </VBox>
                            </children>

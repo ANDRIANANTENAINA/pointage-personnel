@@ -28,7 +28,7 @@ public class EmployeeDAO {
 
         while (rs.next()) {
             Employe emp = new Employe();
-            emp.setNumEmpl(Integer.parseInt(rs.getString("num_empl")));
+            emp.setNumEmpl(rs.getInt("num_empl"));
             emp.setNom(rs.getString("nom"));
             emp.setPrenoms(rs.getString("prenom"));
             emp.setPoste(rs.getString("poste"));

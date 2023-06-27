@@ -15,7 +15,6 @@ import java.sql.SQLException;
 public class UpdateModalEmployeeController {
 
     private int numEmploye;
-    private Employe employe;
 
     @FXML
     private Button btnAnnuller;
@@ -37,7 +36,6 @@ public class UpdateModalEmployeeController {
 
     public void setEmployee(Employe employe) {
         numEmploye = employe.getNumEmpl();
-        this.employe = employe;
         textNom.setText(employe.getNom());
         textPrenom.setText(employe.getPrenoms());
         textPoste.setText(employe.getPoste());

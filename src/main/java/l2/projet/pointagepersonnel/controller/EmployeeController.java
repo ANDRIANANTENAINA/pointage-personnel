@@ -31,7 +31,7 @@ public class EmployeeController {
     private TableColumn<Employe, String> colNom;
 
     @FXML
-    private TableColumn<Employe, String> colNum;
+    private TableColumn<Employe, Integer> colNum;
 
     @FXML
     private TableColumn<Employe, String> colPoste;
@@ -54,7 +54,7 @@ public class EmployeeController {
     }
 
     private void setTableEmployee() {
-        colNum.setCellValueFactory(cellData -> cellData.getValue().numEmplProperty().asObject().asString());
+        colNum.setCellValueFactory(cellData -> cellData.getValue().numEmplProperty().asObject());
         colNom.setCellValueFactory(cellData -> cellData.getValue().nomProperty());
         colPrenom.setCellValueFactory(cellData -> cellData.getValue().prenomsProperty());
         colPoste.setCellValueFactory(cellData -> cellData.getValue().posteProperty());
@@ -89,7 +89,6 @@ public class EmployeeController {
             modalStage.showAndWait();
             initialize();
 
-            initialize();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -126,10 +125,6 @@ public class EmployeeController {
     void handleButtonClick(ActionEvent event) {
         if (event.getSource() == btnAddEmploye) {
             showAsDialog();
-        } else if (event.getSource() == btnDeleteEmploye) {
-            System.out.println("Delete");
-        } else if (event.getSource() == btnUpdateEmploye) {
-            System.out.println("Update");
         }
     }
 

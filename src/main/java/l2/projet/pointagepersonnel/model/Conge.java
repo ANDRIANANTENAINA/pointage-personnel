@@ -1,27 +1,27 @@
 package l2.projet.pointagepersonnel.model;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
-public class Conge {
-    private IntegerProperty numConge;
-    private IntegerProperty numEmpl;
-    private StringProperty motif;
-    private IntegerProperty nbjr;
-    private SimpleObjectProperty<Date> dateDemande;
-    private SimpleObjectProperty<Date> dateRetour;
+public class Conge extends Employe{
+    private SimpleIntegerProperty numConge = new SimpleIntegerProperty();
+    private SimpleIntegerProperty numEmpl = new SimpleIntegerProperty();
+    private SimpleStringProperty motif = new SimpleStringProperty();
+    private SimpleIntegerProperty nbjr = new SimpleIntegerProperty();
+    private SimpleObjectProperty<LocalDate> dateDemande = new SimpleObjectProperty<>();
+    private SimpleObjectProperty<LocalDate> dateRetour = new SimpleObjectProperty<>();
 
-    public Conge() {
+    public Conge(){
+
     }
 
     public int getNumConge() {
         return numConge.get();
     }
 
-    public IntegerProperty numCongeProperty() {
+    public SimpleIntegerProperty numCongeProperty() {
         return numConge;
     }
 
@@ -29,11 +29,13 @@ public class Conge {
         this.numConge.set(numConge);
     }
 
+    @Override
     public int getNumEmpl() {
         return numEmpl.get();
     }
 
-    public IntegerProperty numEmplProperty() {
+    @Override
+    public SimpleIntegerProperty numEmplProperty() {
         return numEmpl;
     }
 
@@ -45,7 +47,7 @@ public class Conge {
         return motif.get();
     }
 
-    public StringProperty motifProperty() {
+    public SimpleStringProperty motifProperty() {
         return motif;
     }
 
@@ -57,7 +59,7 @@ public class Conge {
         return nbjr.get();
     }
 
-    public IntegerProperty nbjrProperty() {
+    public SimpleIntegerProperty nbjrProperty() {
         return nbjr;
     }
 
@@ -65,27 +67,27 @@ public class Conge {
         this.nbjr.set(nbjr);
     }
 
-    public Date getDateDemande() {
+    public LocalDate getDateDemande() {
         return dateDemande.get();
     }
 
-    public SimpleObjectProperty<Date> dateDemandeProperty() {
+    public SimpleObjectProperty<LocalDate> dateDemandeProperty() {
         return dateDemande;
     }
 
-    public void setDateDemande(Date dateDemande) {
+    public void setDateDemande(LocalDate dateDemande) {
         this.dateDemande.set(dateDemande);
     }
 
-    public Date getDateRetour() {
+    public LocalDate getDateRetour() {
         return dateRetour.get();
     }
 
-    public SimpleObjectProperty<Date> dateRetourProperty() {
+    public SimpleObjectProperty<LocalDate> dateRetourProperty() {
         return dateRetour;
     }
 
-    public void setDateRetour(Date dateRetour) {
+    public void setDateRetour(LocalDate dateRetour) {
         this.dateRetour.set(dateRetour);
     }
 
