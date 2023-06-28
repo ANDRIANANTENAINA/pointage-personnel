@@ -112,4 +112,20 @@ public class EmployeeDAO {
         }
         return null;
     }
+
+    public static void updateEmployeeP(int numEmpl, int salaire) throws SQLException {
+        String updateStmt =
+                "UPDATE public.employe\n" +
+                        "\tSET salaire='" + salaire + "'" +
+                        "\tWHERE num_empl='" + numEmpl + "';";
+        System.out.println(updateStmt);
+        try {
+            DBUtil.dbExecuteUpdate(updateStmt);
+        } catch (SQLException e) {
+            System.out.print("Error occurred while UPDATE Operation: " + e);
+            throw e;
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

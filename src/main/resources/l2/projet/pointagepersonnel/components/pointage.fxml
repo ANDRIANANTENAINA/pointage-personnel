@@ -41,7 +41,7 @@
                               <VBox alignment="CENTER_LEFT" prefHeight="89.0" prefWidth="116.0" spacing="10.0">
                                  <children>
                                     <RadioButton fx:id="radioAbsent" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onClickAbsent" text="Liste absent(e) " textFill="#00ae26" />
-                                    <RadioButton fx:id="radioPresent" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onClickPresent" text="Liste present(e)" textFill="#00ae26" />
+<!--                                    <RadioButton fx:id="radioPresent" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onClickPresent" text="Liste present(e)" textFill="#00ae26" />-->
                                  </children>
                               </VBox>
                            </children>

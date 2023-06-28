@@ -49,7 +49,7 @@ public class CongeDAO {
     }
 
     public static ObservableList<Conge> searchConge(String search) {
-        String selectStmt = "SELECT employe.num_empl, employe.nom, employe.prenom, " +
+        String selectStmt = "SELECT employe.num_empl, employe.nom, employe.prenom, employe.poste, " +
                 "conge.num_conge, conge.motif, conge.nbjr, conge.date_demande, conge.date_retour " +
                 "FROM employe " +
                 "JOIN conge ON employe.num_empl = conge.num_empl " +

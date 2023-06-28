@@ -32,6 +32,7 @@ public class PointageDAO {
             pointage.setDatePointage(rs.getDate("date_pointage"));
             pointage.setNom(rs.getString("nom"));
             pointage.setPrenoms(rs.getString("prenom"));
+            pointage.setSalaire(rs.getInt("salaire"));
 
             pointageList.add(pointage);
         }
@@ -39,7 +40,7 @@ public class PointageDAO {
     }
 
     public static ObservableList<Pointage> getPointage(LocalDate datePointage) throws SQLException, ClassNotFoundException {
-        String selectStmt = "SELECT employe.num_empl, employe.nom, employe.prenom, " +
+        String selectStmt = "SELECT employe.num_empl, employe.nom, employe.prenom,  employe.salaire, " +
                 "pointage.num_pointage, pointage.pointage, pointage.date_pointage\n" +
                 "FROM employe\n" +
                 "LEFT JOIN pointage ON employe.num_empl = pointage.num_empl " +
@@ -54,17 +55,6 @@ public class PointageDAO {
         }
     }
 
-    public static Pointage getPointage(int numPointage) throws SQLException, ClassNotFoundException {
-        String selectStmt = "SELECT * FROM pointage WHERE num_pointage=" + numPointage;
-        try {
-            ResultSet rsPointage = DBUtil.dbExecuteQuery(selectStmt);
-            Pointage pointage = getPointageFromResultSet(rsPointage);
-            return pointage;
-        } catch (SQLException e) {
-            System.out.println("While searching a pointage with " + numPointage + " id, an error occurred: " + e);
-            throw e;
-        }
-    }
 
     public static void insertPointage(int numEmpl, String pointage, LocalDate datePointage) throws SQLException, ClassNotFoundException {
         String updateStmt =
@@ -82,12 +72,10 @@ public class PointageDAO {
 
     public static void updatePointage(int numPointage, String pointage) throws SQLException, ClassNotFoundException {
         String updateStmt =
-                "BEGIN\n" +
-                        "   UPDATE pointage\n" +
-                        "      SET pointage = '" + pointage + "'\n" +
-                        "    WHERE num_pointage = " + numPointage + ";\n" +
-                        "   COMMIT;\n" +
-                        "END;";
+                "UPDATE public.pointage\n" +
+                        "\tSET pointage='" + pointage + "' "+
+                        "\tWHERE num_pointage = " + numPointage + ";";
+        System.out.println(updateStmt);
         try {
             DBUtil.dbExecuteUpdate(updateStmt);
         } catch (SQLException e) {
@@ -108,8 +96,13 @@ public class PointageDAO {
         }
     }
 
-    public static ObservableList<Pointage> searchPointages(String search){
-        String selectStmt = "SELECT * FROM pointage WHERE pointage LIKE '%" + search + "%'";
+    public static ObservableList<Pointage> searchPointagesIsAbsent(String pointage, LocalDate datePointage){
+        String selectStmt = "SELECT employe.num_empl, employe.nom, employe.prenom, employe.salaire, " +
+                "pointage.num_pointage, pointage.pointage, pointage.date_pointage\n" +
+                "FROM employe\n" +
+                "LEFT JOIN pointage ON employe.num_empl = pointage.num_empl " +
+                "AND pointage.date_pointage = '"+ datePointage + "' " +
+                "WHERE pointage.pointage = '" + pointage + "';";
         try {
             ResultSet rsPointages = DBUtil.dbExecuteQuery(selectStmt);
             ObservableList<Pointage> pointageList = getPointageList(rsPointages);
@@ -122,7 +115,7 @@ public class PointageDAO {
 
 
     public static ObservableList<Pointage> searchPointage(String search, LocalDate datePointage){
-        String selectStmt = "SELECT employe.num_empl, employe.nom, employe.prenom, " +
+        String selectStmt = "SELECT employe.num_empl, employe.nom, employe.prenom, employe.poste, employe.salaire, " +
                 "pointage.num_pointage, pointage.pointage, pointage.date_pointage\n" +
                 "FROM employe\n" +
                 "LEFT JOIN pointage ON employe.num_empl = pointage.num_empl " +
