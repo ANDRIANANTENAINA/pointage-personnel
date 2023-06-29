@@ -21,9 +21,9 @@
                <children>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <top>
-                        <HBox alignment="CENTER_LEFT" prefHeight="89.0" prefWidth="1038.0" spacing="25.0" style="-fx-background-color: #ffffff;" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
+                        <HBox alignment="CENTER" prefHeight="89.0" prefWidth="1078.0" style="-fx-background-color: #ffffff;" stylesheets="@../css/style.css">
                            <children>
-                              <Label text="FICHE DE PAIE">
+                              <Label contentDisplay="RIGHT" text="FICHE DE PAIE">
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin>

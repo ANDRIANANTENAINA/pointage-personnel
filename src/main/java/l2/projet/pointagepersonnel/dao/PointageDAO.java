@@ -133,4 +133,17 @@ public class PointageDAO {
             return null;
         }
     }
+
+    public static int getNbrAbsence(int numEmpl) {
+        String selectStmt = "SELECT COUNT(*) FROM pointage WHERE num_empl = " + numEmpl + " AND pointage = 'non';";
+        try {
+            ResultSet rsPointage = DBUtil.dbExecuteQuery(selectStmt);
+            if (rsPointage.next()) {
+                return rsPointage.getInt(1);
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println("SQL select operation has been failed: " + e);
+        }
+        return 0;
+    }
 }

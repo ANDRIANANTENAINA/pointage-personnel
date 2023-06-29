@@ -28,16 +28,16 @@ public class EmployeeController {
     private TableView<Employe> tableView;
 
     @FXML
-    private TableColumn<Employe, String> colNom;
-
-    @FXML
     private TableColumn<Employe, Integer> colNum;
 
     @FXML
-    private TableColumn<Employe, String> colPoste;
+    private TableColumn<Employe, String> colNom;
 
     @FXML
     private TableColumn<Employe, String> colPrenom;
+
+    @FXML
+    private TableColumn<Employe, String> colPoste;
 
     @FXML
     private TableColumn<Employe, Integer> colSalaire;

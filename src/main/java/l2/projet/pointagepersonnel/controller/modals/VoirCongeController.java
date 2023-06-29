@@ -1,13 +1,15 @@
 package l2.projet.pointagepersonnel.controller.modals;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import l2.projet.pointagepersonnel.dao.CongeDAO;
 import l2.projet.pointagepersonnel.model.Conge;
 
-import java.time.LocalDate;
+import java.sql.SQLException;
 
 public class VoirCongeController {
     @FXML
@@ -43,17 +45,26 @@ public class VoirCongeController {
         stage.close();
     }
 
-    public void setVoirConge(Conge conge) {
-        LocalDate dateNow = LocalDate.now();
-        int nbjrRestant = conge.getDateRetour().getDayOfYear() - dateNow.getDayOfYear();
+    public void setVoirConge(Conge conges) {
+        ObservableList<Conge> listConge = null;
+        try {
+            listConge = CongeDAO.getCongeByEmpl(conges.getNumEmpl());
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        int totalConge = 0;
+        for(Conge conge: listConge){
+            totalConge = totalConge + conge.getNbjr();
+        }
+        int nbjrRestant = 30 - totalConge;
 
-        voirNumEmpl.setText(String.valueOf(conge.getNumEmpl()));
-        voirNom.setText(conge.getNom());
-        voirPrenoms.setText(conge.getPrenoms());
+        voirNumEmpl.setText(String.valueOf(conges.getNumEmpl()));
+        voirNom.setText(conges.getNom());
+        voirPrenoms.setText(conges.getPrenoms());
         voirNbjr.setText(String.valueOf(nbjrRestant));
-        voirMotif.setText(conge.getMotif());
-        voirPoste.setText(conge.getPoste());
-        voirDateDemande.setText(String.valueOf(conge.getDateDemande()));
-        voirDateRetour.setText(String.valueOf(conge.getDateRetour()));
+        voirMotif.setText(conges.getMotif());
+        voirPoste.setText(conges.getPoste());
+        voirDateDemande.setText(String.valueOf(conges.getDateDemande()));
+        voirDateRetour.setText(String.valueOf(conges.getDateRetour()));
     }
 }
