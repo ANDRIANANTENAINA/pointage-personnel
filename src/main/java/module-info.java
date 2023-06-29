@@ -5,6 +5,7 @@ module l2.projet.pointagepersonnel {
     requires org.controlsfx.controls;
     requires org.postgresql.jdbc;
     requires java.sql;
+    requires aspose.pdf;
 
     opens l2.projet.pointagepersonnel to javafx.fxml;
     exports l2.projet.pointagepersonnel;

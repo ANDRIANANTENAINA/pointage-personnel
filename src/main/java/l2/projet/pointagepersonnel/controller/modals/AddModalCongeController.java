@@ -15,8 +15,8 @@ import l2.projet.pointagepersonnel.model.Employe;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.*;
+
 
 
 public class AddModalCongeController implements Initializable {
@@ -63,7 +63,29 @@ public class AddModalCongeController implements Initializable {
             try {
                 LocalDate dateDemande = datePickerDemande.getValue();
                 LocalDate dateRetour = datePickerRetour.getValue();
+
                 int nombreJr = dateRetour.getDayOfYear() - dateDemande.getDayOfYear();
+
+                ObservableList<Conge> listConge = CongeDAO.getCongeByEmpl(numEmpl);
+                int totalConge = 0;
+                for(Conge conge: listConge){
+                    totalConge = totalConge + conge.getNbjr();
+                }
+                System.out.println(totalConge);
+
+                if ( totalConge >= 30){
+                    MainController.showAlert(Alert.AlertType.ERROR, "Erreur", "nombre de jour depassé", "Veuillez verifier votre notre de jour de congé!");
+                    System.out.println("Veuillez verifier votre notre de jour de congé!");
+                    return;
+                }
+
+                int total =  nombreJr + totalConge ;
+                if ( total >= 30){
+                    MainController.showAlert(Alert.AlertType.ERROR, "Erreur", "nombre de jour depassé", "Veuillez verifier votre notre de jour de congé!");
+                    System.out.println("Veuillez verifier votre notre de jour de congé!");
+                    return;
+                }
+
 
                 CongeDAO.insertConge(numEmpl, nombreJr, textAreaMotif.getText(), dateDemande, dateRetour);
                 Stage stage = (Stage) btnAjouter.getScene().getWindow();

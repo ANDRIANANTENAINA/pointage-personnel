@@ -3,8 +3,6 @@ package l2.projet.pointagepersonnel.dao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import l2.projet.pointagepersonnel.model.Conge;
-import l2.projet.pointagepersonnel.model.Employe;
-import l2.projet.pointagepersonnel.model.Pointage;
 import l2.projet.pointagepersonnel.util.DBUtil;
 
 import java.sql.ResultSet;
@@ -121,6 +119,21 @@ public class CongeDAO {
             System.out.print("Error occurred while UPDATE Operation: " + e);
             throw e;
 
+        }
+    }
+
+    public static ObservableList<Conge> getCongeByEmpl(Integer numEmpl) throws SQLException, ClassNotFoundException {
+        String selectStmt = "SELECT employe.num_empl, employe.nom, employe.prenom, employe.poste,  " +
+                "conge.num_conge, conge.motif, conge.nbjr, conge.date_demande, conge.date_retour " +
+                "FROM employe " +
+                "JOIN conge ON employe.num_empl = conge.num_empl WHERE conge.num_empl = '" + numEmpl + "';";
+        try {
+            ResultSet rsPointage = DBUtil.dbExecuteQuery(selectStmt);
+            ObservableList<Conge> congeList = getCongeList(rsPointage);
+            return congeList;
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println("SQL select operation has been failed: " + e);
+            throw e;
         }
     }
 }

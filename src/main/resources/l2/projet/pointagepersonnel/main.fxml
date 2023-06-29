@@ -54,6 +54,18 @@
                         <Insets left="30.0" />
                      </padding>
                   </Button>
+                  <Button fx:id="pageFDP" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="108.0" mnemonicParsing="false" onMouseClicked="#afficheFDP" prefHeight="49.0" prefWidth="201.0" text="Fiche de paye" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/file.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                  </Button>
                </children>
             </VBox>
          </left>

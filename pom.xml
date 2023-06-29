@@ -48,6 +48,12 @@
             <artifactId>postgresql</artifactId>
             <version>42.6.0</version>
         </dependency>
+        <!--        PDF-->
+        <dependency>
+            <groupId>com.luhuiguo</groupId>
+            <artifactId>aspose-pdf</artifactId>
+            <version>23.1</version>
+        </dependency>
 
     </dependencies>
 

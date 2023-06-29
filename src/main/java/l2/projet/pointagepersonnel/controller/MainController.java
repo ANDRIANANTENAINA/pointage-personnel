@@ -108,6 +108,17 @@ public class MainController{
         }
     }
 
+    @FXML
+    void afficheFDP(MouseEvent event) {
+        try {
+            Parent fxml = FXMLLoader.load(Objects.requireNonNull(Application.class.getResource("components/ficheDepaie.fxml")));
+            contentArea.getChildren().removeAll();
+            contentArea.getChildren().setAll(fxml);
+        } catch (IOException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public static void showAlert(Alert.AlertType alertType, String erreur, String champsVides, String s) {
         Alert alert = new Alert(alertType);
         alert.setTitle(erreur);
