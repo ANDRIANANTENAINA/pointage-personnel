@@ -19,6 +19,7 @@
          <center>
             <VBox alignment="TOP_CENTER" prefHeight="382.0" prefWidth="336.0" BorderPane.alignment="CENTER">
                <children>
+                  <Text fx:id="textNotif" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="332.13671875" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Employée :" wrappingWidth="334.232421875">
                      <VBox.margin>
                         <Insets top="30.0" />

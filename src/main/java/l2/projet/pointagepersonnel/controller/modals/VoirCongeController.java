@@ -39,6 +39,7 @@ public class VoirCongeController {
     @FXML
     private Text voirPrenoms;
 
+
     @FXML
     void handleClickCancel(ActionEvent event) {
         Stage stage = (Stage) btnFermer.getScene().getWindow();

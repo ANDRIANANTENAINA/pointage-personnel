@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import l2.projet.pointagepersonnel.controller.MainController;
 import l2.projet.pointagepersonnel.dao.CongeDAO;
@@ -40,12 +41,24 @@ public class AddModalCongeController implements Initializable {
 
     private Integer numEmpl = null;
 
+    @FXML
+    private Text textNotif;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // onChage date, set text notif to empty
+        datePickerDemande.valueProperty().addListener((observable, oldValue, newValue) -> {
+            textNotif.setText("");
+        });
+
+        datePickerRetour.valueProperty().addListener((observable, oldValue, newValue) -> {
+            textNotif.setText("");
+        });
         loadEmployeeComboBox();
         datePickerDemande.setValue(LocalDate.now());
         combiBoxConge.valueProperty().addListener((observable, oldValue, newValue) -> {
             numEmpl = Integer.valueOf(combiBoxConge.getSelectionModel().getSelectedItem().split("-")[0]);
+            textNotif.setText("");
         });
     }
 
@@ -71,18 +84,10 @@ public class AddModalCongeController implements Initializable {
                 for(Conge conge: listConge){
                     totalConge = totalConge + conge.getNbjr();
                 }
-                System.out.println(totalConge);
-
-                if ( totalConge >= 30){
-                    MainController.showAlert(Alert.AlertType.ERROR, "Erreur", "nombre de jour depassé", "Veuillez verifier votre notre de jour de congé!");
-                    System.out.println("Veuillez verifier votre notre de jour de congé!");
-                    return;
-                }
-
                 int total =  nombreJr + totalConge ;
+
                 if ( total >= 30){
-                    MainController.showAlert(Alert.AlertType.ERROR, "Erreur", "nombre de jour depassé", "Veuillez verifier votre notre de jour de congé!");
-                    System.out.println("Veuillez verifier votre notre de jour de congé!");
+                    textNotif.setText("Le nombre de jour de conge depasse 30 jours, vous avez déjà "+ totalConge +" jours de congé");
                     return;
                 }
 
