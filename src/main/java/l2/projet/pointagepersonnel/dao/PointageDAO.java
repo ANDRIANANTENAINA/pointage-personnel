@@ -58,7 +58,7 @@ public class PointageDAO {
 
     public static void insertPointage(int numEmpl, String pointage, LocalDate datePointage) throws SQLException, ClassNotFoundException {
         String updateStmt =
-                "INSERT INTO public.pointage(\n" +
+                "INSERT INTO pointage(\n" +
                         "\tnum_empl, pointage, date_pointage)\n" +
                         "\tVALUES (" + numEmpl +  ", '" + pointage +  "', '" + datePointage +  "');";
         System.out.println(updateStmt);
@@ -72,7 +72,7 @@ public class PointageDAO {
 
     public static void updatePointage(int numPointage, String pointage) throws SQLException, ClassNotFoundException {
         String updateStmt =
-                "UPDATE public.pointage\n" +
+                "UPDATE pointage\n" +
                         "\tSET pointage='" + pointage + "' "+
                         "\tWHERE num_pointage = " + numPointage + ";";
         System.out.println(updateStmt);

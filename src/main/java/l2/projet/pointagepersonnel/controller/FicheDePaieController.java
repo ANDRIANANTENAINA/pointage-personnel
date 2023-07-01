@@ -57,17 +57,7 @@ public class FicheDePaieController implements Initializable {
     }
 
     private void setTableEmployee() {
-        colNum.setCellValueFactory(cellData -> cellData.getValue().numEmplProperty().asObject());
-        colNom.setCellValueFactory(cellData -> cellData.getValue().nomProperty());
-        colPrenom.setCellValueFactory(cellData -> cellData.getValue().prenomsProperty());
-        colPoste.setCellValueFactory(cellData -> cellData.getValue().posteProperty());
-        colSalaire.setCellValueFactory(cellData -> cellData.getValue().salaireProperty().asObject());
-
-        try {
-            tableView.setItems(EmployeeDAO.getEmployees());
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        EmployeeController.setColumnTable(colNum, colNom, colPrenom, colPoste, colSalaire, tableView);
     }
 
     @FXML

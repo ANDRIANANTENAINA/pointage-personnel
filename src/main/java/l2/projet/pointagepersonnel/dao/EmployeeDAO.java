@@ -41,7 +41,7 @@ public class EmployeeDAO {
 
     public static void insertEmployee(String nom, String prenom, String poste, Integer salaire) throws SQLException, ClassNotFoundException {
         String updateStmt =
-                "INSERT INTO public.employe(\n" +
+                "INSERT INTO employe(\n" +
                         "\tnom, prenom, poste, salaire)\n" +
                         "\tVALUES ('" + nom +  "', '" + prenom +  "', '" + poste +  "', " + salaire +  ");";
         System.out.println(updateStmt);
@@ -79,7 +79,7 @@ public class EmployeeDAO {
     public static void updateEmployee(Integer id, String nom, String prenom, String poste, Integer salaire)
             throws SQLException, ClassNotFoundException {
         String updateStmt =
-                "UPDATE public.employe\n" +
+                "UPDATE employe\n" +
                         "\tSET nom='" + nom +  "', prenom='" + prenom +  "', poste='" + poste +  "', salaire='" + salaire + "'" +
                         "\tWHERE num_empl='" + id + "';";
         try {
@@ -115,7 +115,7 @@ public class EmployeeDAO {
 
     public static void updateEmployeeP(int numEmpl, int salaire) throws SQLException {
         String updateStmt =
-                "UPDATE public.employe\n" +
+                "UPDATE employe\n" +
                         "\tSET salaire='" + salaire + "'" +
                         "\tWHERE num_empl='" + numEmpl + "';";
         System.out.println(updateStmt);

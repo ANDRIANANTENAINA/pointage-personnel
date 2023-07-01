@@ -6,11 +6,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import l2.projet.pointagepersonnel.Application;
 import l2.projet.pointagepersonnel.controller.modals.UpdateModalCongeController;
 import l2.projet.pointagepersonnel.controller.modals.VoirCongeController;
@@ -26,15 +24,6 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CongeController implements Initializable {
-
-    @FXML
-    private Button btnAddConge;
-
-    @FXML
-    private Button btnDeleteConge;
-
-    @FXML
-    private Button btnUpdateConge;
 
     @FXML
     private TableColumn<Conge, String> colNom;
@@ -54,11 +43,6 @@ public class CongeController implements Initializable {
     @FXML
     private TableView<Conge> tableView;
 
-    @FXML
-    private TextField textFieldSearch;
-
-    @FXML
-    private Button voirPlus;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -86,7 +70,7 @@ public class CongeController implements Initializable {
     }
 
     @FXML
-    void onClickDeleteConge(MouseEvent event) {
+    void onClickDeleteConge() {
         Conge conge = tableView.getSelectionModel().getSelectedItem();
         if (conge == null) {
             MainController.showAlert(Alert.AlertType.WARNING, "Aucune sélection", "Aucun employé sélectionné", "Veuillez sélectionner le congé à supprimer.");
@@ -111,12 +95,12 @@ public class CongeController implements Initializable {
     }
 
     @FXML
-    void onClickNewConge(MouseEvent event) {
+    void onClickNewConge() {
         showAsDialog("addModalConge");
     }
 
     @FXML
-    void onClickUpdateConge(MouseEvent event) {
+    void onClickUpdateConge() {
         Conge conge = tableView.getSelectionModel().getSelectedItem();
         if (conge == null) {
             MainController.showAlert(Alert.AlertType.WARNING, "Aucune sélection", "Aucun congé sélectionné", "Veuillez sélectionner un employé.");
@@ -143,31 +127,27 @@ public class CongeController implements Initializable {
     }
 
     @FXML
-    void onClickVoirConge(MouseEvent event) throws IOException {
+    void onClickVoirConge() throws IOException {
         Conge conge = tableView.getSelectionModel().getSelectedItem();
         if (conge == null) {
             MainController.showAlert(Alert.AlertType.WARNING, "Aucune sélection", "Aucun congé sélectionné", "Veuillez sélectionner un employé.");
             return;
         }
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Objects.requireNonNull(Application.class.getResource("modals/voirConge.fxml")));
-            Parent root = loader.load();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Objects.requireNonNull(Application.class.getResource("modals/voirConge.fxml")));
+        Parent root = loader.load();
 
-            VoirCongeController tmpController = loader.getController();
-            tmpController.setVoirConge(conge);
+        VoirCongeController tmpController = loader.getController();
+        tmpController.setVoirConge(conge);
 
-            Stage modalStage = new Stage();
-            modalStage.initModality(Modality.APPLICATION_MODAL);
+        Stage modalStage = new Stage();
+        modalStage.initModality(Modality.APPLICATION_MODAL);
 //            modalStage.initStyle(StageStyle.UNDECORATED);
-            modalStage.setTitle("Congé d'un employé");
-            modalStage.setScene(new Scene(root));
-            modalStage.showAndWait();
+        modalStage.setTitle("Congé d'un employé");
+        modalStage.setScene(new Scene(root));
+        modalStage.showAndWait();
 
-            setTableConge();
-        } catch (IOException e) {
-            throw e;
-        }
+        setTableConge();
     }
 
     private void showAsDialog(String url) {

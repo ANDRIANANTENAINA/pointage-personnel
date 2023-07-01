@@ -65,7 +65,7 @@ public class CongeDAO {
 
     public static void insertConge(int numEmpl, int nbjr ,String motif, LocalDate dateDemande, LocalDate dateRetour) throws SQLException, ClassNotFoundException {
         String updateStmt =
-                "INSERT INTO public.conge(\n" +
+                "INSERT INTO conge(\n" +
                         "\tnum_empl, motif, nbjr, date_demande, date_retour)\n" +
                         "\tVALUES (" + numEmpl +  ", '" + motif +  "', '" + nbjr + "', " +
                         "'" + dateDemande +  "','"+ dateRetour +"');";
@@ -107,7 +107,7 @@ public class CongeDAO {
 
     public static void updateConge(Integer numConge, int nombreJr, String motifText, LocalDate dateDemande, LocalDate dateRetour) throws SQLException, ClassNotFoundException {
         String updateStmt =
-                "UPDATE public.conge\n" +
+                "UPDATE conge\n" +
                         "\tSET motif='" + motifText + "', " +
                         "nbjr='" + nombreJr + "', " +
                         "date_demande='" + dateDemande + "', " +

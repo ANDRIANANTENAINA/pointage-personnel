@@ -1,7 +1,6 @@
 package l2.projet.pointagepersonnel.controller.modals;
 
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
@@ -41,13 +40,13 @@ public class VoirCongeController {
 
 
     @FXML
-    void handleClickCancel(ActionEvent event) {
+    void handleClickCancel() {
         Stage stage = (Stage) btnFermer.getScene().getWindow();
         stage.close();
     }
 
     public void setVoirConge(Conge conges) {
-        ObservableList<Conge> listConge = null;
+        ObservableList<Conge> listConge;
         try {
             listConge = CongeDAO.getCongeByEmpl(conges.getNumEmpl());
         } catch (SQLException | ClassNotFoundException e) {

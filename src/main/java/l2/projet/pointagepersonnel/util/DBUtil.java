@@ -2,11 +2,21 @@ package l2.projet.pointagepersonnel.util;
 
 import java.sql.*;
 public class DBUtil {
-    private static final String JDBC_DRIVER = "org.postgresql.Driver";
+    // for postgres
+    // private static final String JDBC_DRIVER = "org.postgresql.Driver";
+
+    // for mysql
+    private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+
     private static Connection conn = null;
-    private static final String connStr = "jdbc:postgresql://localhost/pointage";
-    private static final String username = "base";
-    private static final String password = "Falinirina!0205";
+
+    // for postgres
+    // private static final String connStr = "jdbc:postgresql://localhost/pointage";
+
+    // for mysql
+    private static final String connStr = "jdbc:mysql://localhost:3306/pointage";
+    private static final String username = "root";
+    private static final String password = "";
     //Connect to DB
     public static void dbConnect() throws SQLException, ClassNotFoundException {
         try {

@@ -7,6 +7,7 @@ module l2.projet.pointagepersonnel {
     requires java.sql;
     requires aspose.pdf;
     requires converter;
+    requires mysql.connector.j;
 
     opens l2.projet.pointagepersonnel to javafx.fxml;
     exports l2.projet.pointagepersonnel;

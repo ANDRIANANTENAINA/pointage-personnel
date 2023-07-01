@@ -7,7 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import l2.projet.pointagepersonnel.Application;
@@ -22,7 +21,7 @@ import java.util.Optional;
 
 public class EmployeeController {
     @FXML
-    private Button btnAddEmploye, btnDeleteEmploye, btnUpdateEmploye;
+    private Button btnAddEmploye;
 
     @FXML
     private TableView<Employe> tableView;
@@ -48,12 +47,16 @@ public class EmployeeController {
     }
 
     @FXML
-    void searchEmployee(KeyEvent event) throws SQLException, ClassNotFoundException {
+    void searchEmployee(KeyEvent event) {
         String search = ((TextField) event.getSource()).getText();
         tableView.setItems(EmployeeDAO.searchEmployees(search));
     }
 
     private void setTableEmployee() {
+        setColumnTable(colNum, colNom, colPrenom, colPoste, colSalaire, tableView);
+    }
+
+    static void setColumnTable(TableColumn<Employe, Integer> colNum, TableColumn<Employe, String> colNom, TableColumn<Employe, String> colPrenom, TableColumn<Employe, String> colPoste, TableColumn<Employe, Integer> colSalaire, TableView<Employe> tableView) {
         colNum.setCellValueFactory(cellData -> cellData.getValue().numEmplProperty().asObject());
         colNom.setCellValueFactory(cellData -> cellData.getValue().nomProperty());
         colPrenom.setCellValueFactory(cellData -> cellData.getValue().prenomsProperty());
@@ -68,7 +71,7 @@ public class EmployeeController {
     }
 
     @FXML
-    void modifyEmployee(MouseEvent event) {
+    void modifyEmployee() {
         Employe employe = tableView.getSelectionModel().getSelectedItem();
         if (employe == null) {
             MainController.showAlert(Alert.AlertType.WARNING, "Aucune sélection", "Aucun employé sélectionné", "Veuillez sélectionner un employé à éditer.");
@@ -97,7 +100,7 @@ public class EmployeeController {
 
 
     @FXML
-    void deleteEmployee(MouseEvent event) {
+    void deleteEmployee() {
         Employe employe = tableView.getSelectionModel().getSelectedItem();
         if (employe == null) {
             MainController.showAlert(Alert.AlertType.WARNING, "Aucune sélection", "Aucun employé sélectionné", "Veuillez sélectionner un employé à supprimer.");
@@ -112,7 +115,7 @@ public class EmployeeController {
 
             if (result.isPresent() && result.get() == ButtonType.OK){
                 EmployeeDAO.deleteEmployee(String.valueOf(employe.getNumEmpl()));
-                initialize();;
+                initialize();
             }else {
                 confirmationAlert.close();
             }
@@ -131,7 +134,8 @@ public class EmployeeController {
     private void showAsDialog() {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(Application.class.getResource("modals/addModalEmployee.fxml")));
-            Stage stage = new Stage();
+            Stage stage;
+            stage = new Stage();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setResizable(false);
